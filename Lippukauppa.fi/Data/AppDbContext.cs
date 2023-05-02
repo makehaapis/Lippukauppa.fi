@@ -24,9 +24,10 @@ namespace Lippukauppa.fi.Data
             base.OnModelCreating(modelBuilder);
         }
 
+        public DbSet<Venue> Venues { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Artist_Event> Artist_Events { get; set; }
-        public DbSet<Venue> VEnues { get; set; }
+        
     }
 }

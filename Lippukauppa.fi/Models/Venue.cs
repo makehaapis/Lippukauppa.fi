@@ -6,8 +6,8 @@ namespace Lippukauppa.fi.Models
     public class Venue
     {
         [Key]
-        public int LocationId { get; set; }
-        public string? ProfilePictureURL { get; set; }
+        public int VenueId { get; set; }
+        public string?VenuePictureURL { get; set; }
         [Required(ErrorMessage = "Name is required!")]
         [StringLength(30, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 30 characters")]
         public string? Name { get; set; }
