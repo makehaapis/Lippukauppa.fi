@@ -4,19 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lippukauppa.fi.Controllers
 {
-    public class ArtistsController : Controller
+    public class VenuesController : Controller
     {
         private readonly AppDbContext _context;
 
-        public ArtistsController(AppDbContext context)
+        public VenuesController(AppDbContext context)
         {
             _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            var allArtists = await _context.Artists.ToListAsync();
-            return View(allArtists);
+            var allVenues = await _context.Venues.ToListAsync();
+            return View(allVenues);
         }
     }
 }
