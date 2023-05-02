@@ -18,11 +18,12 @@ namespace Lippukauppa.fi.Models
         public int TicketQuantity { get; set; }
 
         //Relationships
-        //public List<Artist_Event> Artists_Events { get; set; }
-        //Venue
-        public int VenueId { get; set; }
-        [ForeignKey("VenueId")]
+        public List<Artist_Event> Artists_Events { get; set; }
+        //Location
+        public int LocationId { get; set; }
+        [ForeignKey("LocationId")]
 
         public Venue Venue { get; set; }
+
     }
 }

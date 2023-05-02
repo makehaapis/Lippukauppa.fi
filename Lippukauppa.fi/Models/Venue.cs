@@ -21,5 +21,6 @@ namespace Lippukauppa.fi.Models
         public string? PostalCode { get; set; }
 
         //Relationships
+        public List<Event> Events { get; set; }
     }
 }

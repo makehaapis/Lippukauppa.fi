@@ -20,5 +20,6 @@ namespace Lippukauppa.fi.Models
         public string? Description { get; set; }
 
         //Relationships
+        public List<Artist_Event> Artists_Events { get; set; }
     }
 }
