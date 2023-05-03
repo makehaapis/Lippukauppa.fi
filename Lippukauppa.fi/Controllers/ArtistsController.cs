@@ -13,11 +13,14 @@ namespace Lippukauppa.fi.Controllers
         {
             _service = service;
         }
-
         public async Task<IActionResult> Index()
         {
             var allArtists = await _service.GetAll();
             return View(allArtists);
+        }
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }
