@@ -1,4 +1,5 @@
 ﻿using Lippukauppa.fi.Data;
+using Lippukauppa.fi.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,16 +7,16 @@ namespace Lippukauppa.fi.Controllers
 {
     public class ArtistsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IArtistsService _service;
 
-        public ArtistsController(AppDbContext context)
+        public ArtistsController(IArtistsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public async Task<IActionResult> Index()
         {
-            var allArtists = await _context.Artists.ToListAsync();
+            var allArtists = await _service.GetAll();
             return View(allArtists);
         }
     }
