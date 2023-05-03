@@ -11,10 +11,10 @@ namespace Lippukauppa.fi.Data.Services
             _context = context;
         }
 
-        public void Add(Artist artist)
+        public async Task AddAsync(Artist artist)
         {
-            _context.Artists.Add(artist);
-            _context.SaveChanges();
+            await _context.Artists.AddAsync(artist);
+            await _context.SaveChangesAsync();
         }
 
         public void Delete(int id)
@@ -22,15 +22,16 @@ namespace Lippukauppa.fi.Data.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Artist>> GetAll()
+        public async Task<IEnumerable<Artist>> GetAllAsync()
         {
             var result = await _context.Artists.ToListAsync();
             return result;
         }
 
-        public Artist GetById(int id)
+        public async Task<Artist> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Artists.FirstOrDefaultAsync(n => n.ArtistId == id);
+            return result;
         }
 
         public Artist Update(int id, Artist newArtist)

@@ -16,7 +16,7 @@ namespace Lippukauppa.fi.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var allArtists = await _service.GetAll();
+            var allArtists = await _service.GetAllAsync();
             return View(allArtists);
         }
         public IActionResult Create()
@@ -26,12 +26,19 @@ namespace Lippukauppa.fi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Title,ProfilePictureURL, Description")]Artist artist)
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 return View(artist);
             }
-            _service.Add(artist);
+            await _service.AddAsync(artist);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var artistDetails = await _service.GetByIdAsync(id);
+            if (artistDetails == null) return View("Empty");
+            return View(artistDetails);
         }
     }
 }
