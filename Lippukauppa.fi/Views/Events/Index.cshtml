@@ -7,23 +7,19 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-md-4 col-xs-6 border-primary mb-3">
-            <div class="card mb-3" style="max-width: 540px;">
+        <div class="col-md-4 col-xs-6 mb-3">
+            <div class="card mb-3 border-1" style="max-width: 540px;">
                 <div class="row g-0">
-                    <div class="col-md-12">
-                        <div class="card-header text-white bg-info">
-                            <p class="card-text">
-                                <h5 class="card-title">
-                                    @item.Name
-                                </h5>
-                            </p>
-                        </div>
-                    </div>
                     <div class="col-md-6">
                         <img src="@item.ImageUrl" width="100%" alt="@item.Name">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @item.Name
+                                </h5>
+                            </p>
                             <p class="card-text">@item.Description</p>
                             <p class="card-text"><b>Start Date: </b>@item.StartDate.ToString("dd MMM yy")</p>
                             <p class="card-text"><b>End Date: </b>@item.EndDate.ToString("dd MMM yy")</p>
@@ -42,18 +38,16 @@
                                     <span class="badge bg-primary text-white">UPCOMING</span>
                                 }
                             </p>
-
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="card-footer ">
+                        <div class="card-footer bg-white text-dark border-0">
                             <p class="card-text">
                                 <a class="btn btn-outline-primary float-right">
                                     <i class="bi bi-eye-fill"></i> Show Details
                                 </a>
                                 <a class="btn btn-success text-white">
                                     @((DateTime.Now > item.EndDate) ? "disabled" : "")
-
                                     <i class="bi bi-cart-plus">Add to Cart (@(item.TicketPrice)€)</i>
                                 </a>
                             </p>
