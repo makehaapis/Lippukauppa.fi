@@ -1,5 +1,6 @@
 ﻿using Lippukauppa.fi.Data;
 using Lippukauppa.fi.Data.Services;
+using Lippukauppa.fi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,16 @@ namespace Lippukauppa.fi.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Title,ProfilePictureURL, Description")]Artist artist)
+        {
+            if(ModelState.IsValid)
+            {
+                return View(artist);
+            }
+            _service.Add(artist);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
