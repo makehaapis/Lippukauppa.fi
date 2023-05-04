@@ -7,7 +7,7 @@ namespace Lippukauppa.fi.Data.Services
         Task<IEnumerable<Artist>> GetAllAsync();
         Task<Artist> GetByIdAsync(int id);
         Task AddAsync(Artist artist);
-        Artist Update(int id, Artist newArtist);
-        void Delete(int id);
+        Task<Artist> UpdateAsync(int id, Artist updatedArtist);
+        Task DeleteAsync(int id);
     }
 }

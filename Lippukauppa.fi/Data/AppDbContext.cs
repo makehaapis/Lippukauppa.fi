@@ -18,8 +18,8 @@ namespace Lippukauppa.fi.Data
 
             modelBuilder.Entity<Artist_Event>().HasOne(e => e.Event).WithMany(ae => ae.Artists_Events).HasForeignKey(e =>
             e.EventId);
-            modelBuilder.Entity<Artist_Event>().HasOne(a => a.Artist).WithMany(ae => ae.Artists_Events).HasForeignKey(a =>
-            a.ArtistId);
+            /*modelBuilder.Entity<Artist_Event>().HasOne(a => a.Artist).WithMany(ae => ae.Artists_Events).HasForeignKey(a =>
+            a.ArtistId);*/
 
             base.OnModelCreating(modelBuilder);
         }

@@ -3,6 +3,7 @@ using Lippukauppa.fi.Data.Services;
 using Lippukauppa.fi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace Lippukauppa.fi.Controllers
 {
@@ -19,6 +20,7 @@ namespace Lippukauppa.fi.Controllers
             var allArtists = await _service.GetAllAsync();
             return View(allArtists);
         }
+
         public IActionResult Create()
         {
             return View();
@@ -37,8 +39,44 @@ namespace Lippukauppa.fi.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var artistDetails = await _service.GetByIdAsync(id);
-            if (artistDetails == null) return View("Empty");
+            if (artistDetails == null) return View("NotFound");
             return View(artistDetails);
+        }
+
+        //Get: Artists/Edit/id
+        public async Task<IActionResult> Edit(int id)
+        {
+            var artistDetails = await _service.GetByIdAsync(id);
+            if (artistDetails == null) return View("NotFound");
+            return View(artistDetails);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Title,ProfilePictureURL,Description")] Artist artist)
+        {
+            artist.ArtistId = id;
+            if (!ModelState.IsValid)
+            {
+                return View(artist);
+            }
+            await _service.UpdateAsync(id, artist);
+            return RedirectToAction(nameof(Index));
+        }
+
+        //Get: Artists/Delete/id
+        public async Task<IActionResult> Delete(int id)
+        {
+            var artistDetails = await _service.GetByIdAsync(id);
+            if (artistDetails == null) return View("NotFound");
+            return View(artistDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var artistDetails = await _service.GetByIdAsync(id);
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

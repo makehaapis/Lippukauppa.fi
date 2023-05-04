@@ -110,29 +110,6 @@ namespace Lippukauppa.fi.Data
                     });
                     context.SaveChanges();
                 }
-                //Artists & Events
-                if (!context.Artist_Events.Any())
-                {
-                    context.Artist_Events.AddRange(new List<Artist_Event>()
-                    {
-                        new Artist_Event
-                        {
-                            ArtistId = 1,
-                            EventId = 1,
-                        },
-                        new Artist_Event
-                        {
-                            ArtistId = 1,
-                            EventId = 2,
-                        },
-                        new Artist_Event
-                        {
-                            ArtistId = 2,
-                            EventId = 2,
-                        }
-                    });
-                    context.SaveChanges();
-                }
             }
         }
     }
