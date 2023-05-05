@@ -11,13 +11,13 @@ namespace Lippukauppa.fi.Models
 
         [Required(ErrorMessage = "Title is required!")]
         [StringLength(30, MinimumLength = 3, ErrorMessage = "Title must be between 3 and 30 characters")]
-        public string? Title { get; set; }
+        public string Title { get; set; }
 
         [Display(Name = "Profile Picture URL")]
         [Required(ErrorMessage = "Profile Picture is required ")]
-        public string? ProfilePictureURL { get; set; }
+        public string ProfilePictureURL { get; set; }
 
         [StringLength(1000)]
-        public string? Description { get; set; }
+        public string Description { get; set; }
     }
 }

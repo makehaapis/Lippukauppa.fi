@@ -1,0 +1,70 @@
+﻿@model Venue
+
+@{
+    ViewData["Title"] = "Delete Venue";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>@Model.Name</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group text-center">
+                    <img id="VenuePicturePreview" class="border-info rounded-0" style="max-width: 150px" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="VenuePictureURL" class="control-label"></label>
+                    <input asp-for="VenuePictureURL" class="form-control" readonly />
+                    <span asp-validation-for="VenuePictureURL" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" readonly />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" readonly />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PostalCode" class="control-label"></label>
+                    <input asp-for="PostalCode" class="form-control" readonly />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" readonly />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="Id">
+                            <input type="submit" value="Confirm" class="btn btn-danger float-right"/>
+                        </form>
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('VenuePicturePreview');
+            output.src = $("#VenuePictureURL").val();
+        })
+        $("#VenuePictureURL").on("change", function () {
+            var output = document.getElementById('VenuePicturePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}
