@@ -82,7 +82,7 @@ namespace Lippukauppa.fi.Data
                             StartDate = DateTime.Parse("29/01/2023"),
                             EndDate = DateTime.Parse("29/01/2023"),
                             SellStartDate = DateTime.Parse("29/01/2023"),
-                            VenueId = 1,
+
                             ImageUrl =  ""
                         },
                         new Event
@@ -93,7 +93,6 @@ namespace Lippukauppa.fi.Data
                             StartDate = DateTime.Parse("29/01/2023"),
                             EndDate = DateTime.Parse("29/01/2023"),
                             SellStartDate = DateTime.Parse("29/01/2023"),
-                            VenueId = 1,
                             ImageUrl =  ""
                         },
                         new Event
@@ -104,7 +103,6 @@ namespace Lippukauppa.fi.Data
                             StartDate = DateTime.Parse("29/01/2023"),
                             EndDate = DateTime.Parse("29/01/2023"),
                             SellStartDate = DateTime.Parse("29/01/2023"),
-                            VenueId = 1,
                             ImageUrl =  "https://www.lippu.fi/obj/media/FI-eventim/teaser/evo/1x1/2022/WT_amore156x198.jpg",
                         },
                     });

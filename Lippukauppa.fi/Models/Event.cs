@@ -6,7 +6,7 @@ namespace Lippukauppa.fi.Models
     public class Event
     {
         [Key]
-        public int EventId { get; set; }
+        public int Id { get; set; }
         public string? ImageUrl { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
@@ -16,14 +16,6 @@ namespace Lippukauppa.fi.Models
 
         public DateTime SellStartDate { get; set; }
         public int TicketQuantity { get; set; }
-
-        //Relationships
-        public List<Artist_Event> Artists_Events { get; set; }
-        //Location
-        public int VenueId { get; set; }
-        [ForeignKey("VenueId")]
-
-        public Venue Venue { get; set; }
 
     }
 }

@@ -6,7 +6,7 @@ namespace Lippukauppa.fi.Models
     public class Venue
     {
         [Key]
-        public int VenueId { get; set; }
+        public int Id { get; set; }
         public string?VenuePictureURL { get; set; }
         [Required(ErrorMessage = "Name is required!")]
         [StringLength(30, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 30 characters")]
@@ -19,8 +19,5 @@ namespace Lippukauppa.fi.Models
         public string? City { get; set; }
         [Required(ErrorMessage = "Postal code is required!")]
         public string? PostalCode { get; set; }
-
-        //Relationships
-        public List<Event> Events { get; set; }
     }
 }

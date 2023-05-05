@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid w-75">
+            <div class="container w-75 m-auto">
                 <a class="navbar-brand" asp-controller="Events" asp-action="Index">Lippukauppa.fi</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -40,13 +40,13 @@
             </div>
         </nav>
     </header>
-        <div class="container-fluid w-75">
+    <div class="container w-75 m-auto">
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
             </div>
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container w-75 m-auto">
             &copy; 2021 - Lippukauppa.fi
         </div>
     </footer>

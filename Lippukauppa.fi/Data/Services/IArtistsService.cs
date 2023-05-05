@@ -1,13 +1,10 @@
-﻿using Lippukauppa.fi.Models;
+﻿using Lippukauppa.fi.Data.Base;
+using Lippukauppa.fi.Models;
 
 namespace Lippukauppa.fi.Data.Services
 {
-    public interface IArtistsService
+    public interface IArtistsService: IEntityBaseRepository<Artist>
     {
-        Task<IEnumerable<Artist>> GetAllAsync();
-        Task<Artist> GetByIdAsync(int id);
-        Task AddAsync(Artist artist);
-        Task<Artist> UpdateAsync(int id, Artist updatedArtist);
-        Task DeleteAsync(int id);
+
     }
 }

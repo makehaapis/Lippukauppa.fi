@@ -53,7 +53,7 @@ namespace Lippukauppa.fi.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Title,ProfilePictureURL,Description")] Artist artist)
         {
-            artist.ArtistId = id;
+            artist.Id = id;
             if (!ModelState.IsValid)
             {
                 return View(artist);

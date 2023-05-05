@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Lippukauppa.fi.Data.Base;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
 namespace Lippukauppa.fi.Models
 {
-    public class Artist
+    public class Artist: IEntityBase
     {
         [Key]
-        public int ArtistId { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Title is required!")]
         [StringLength(30, MinimumLength = 3, ErrorMessage = "Title must be between 3 and 30 characters")]
@@ -18,8 +19,5 @@ namespace Lippukauppa.fi.Models
 
         [StringLength(1000)]
         public string? Description { get; set; }
-
-        //Relationships
-       // public List<Artist_Event> Artists_Events { get; set; }
     }
 }
