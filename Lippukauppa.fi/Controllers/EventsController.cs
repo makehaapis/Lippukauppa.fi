@@ -4,6 +4,7 @@ using Lippukauppa.fi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics.Tracing;
 
 namespace Lippukauppa.fi.Controllers
@@ -20,6 +21,17 @@ namespace Lippukauppa.fi.Controllers
         {
             var allEvents = await _service.GetAllAsync(n => n.venue);
             return View(allEvents);
+        }
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var allEvents = await _service.GetAllAsync(n => n.venue);
+
+            if (!String.IsNullOrEmpty(searchString)) 
+            {
+                var filteredEvents = allEvents.Where(e => e.Name.Contains(searchString)).ToList();
+                return View("Index", filteredEvents);
+            }
+            return View("Index",allEvents);
         }
 
 
