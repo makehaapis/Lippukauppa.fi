@@ -17,11 +17,14 @@ namespace Lippukauppa.fi.Data
                 ae.EventId
             });
         }
-
         public DbSet<Venue> Venues { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Artist_Event> Artists_Events { get; set;}
+
+        //Orders
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
         
     }
 }
