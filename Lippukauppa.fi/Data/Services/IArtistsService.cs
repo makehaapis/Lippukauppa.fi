@@ -3,8 +3,8 @@ using Lippukauppa.fi.Models;
 
 namespace Lippukauppa.fi.Data.Services
 {
-    public interface IArtistsService: IEntityBaseRepository<Artist>
+    public interface IArtistsService : IEntityBaseRepository<Artist>
     {
-
+        Task<Artist> GetArtistByIdAsync(int id);
     }
 }

@@ -20,5 +20,8 @@ namespace Lippukauppa.fi.Models
         public string City { get; set; }
         [Required(ErrorMessage = "Postal code is required!")]
         public string PostalCode { get; set; }
+
+        //Relationships
+        public List<Event> Events { get; set; }
     }
 }

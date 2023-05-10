@@ -1,0 +1,70 @@
+﻿@model Event
+
+@{
+    ViewData["Title"] = "Event Details";
+}
+
+<div class="row">
+        <div class="col-md-8 offset-2">
+            <div class="card mb-3 border-1" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="@Model.ImageURL" width="100%" alt="@Model.Name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @Model.Name
+                                </h5>
+                            </p>
+                        <a asp-controller="Venues" asp-action="Details" asp-route-id="@Model.VenueId">Venue: @Model.venue.Name</a>
+                            <p class="card-text">@Model.Description</p>
+                            <p class="card-text"><b>Start Date: </b>@Model.StartDate.ToString("dd MMM yy")</p>
+                            <p class="card-text"><b>End Date: </b>@Model.EndDate.ToString("dd MMM yy")</p>
+                            <p class="card-text ">
+                                <b>Status: </b>
+                                @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
+                                {
+                                    <span class="badge bg-success text-white">AVAILABLE</span>
+                                }
+                                else if (DateTime.Now > Model.EndDate)
+                                {
+                                    <span class="badge bg-danger text-white">EXPIRED</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-primary text-white">UPCOMING</span>
+                                }
+                            </p>
+                            <div class="row">
+                        @foreach (var artist in Model.Artists_Events)
+                        {
+                            <div class="columns text-center">
+                                <img class="border-info rounded-0" src="@artist.Artist.ProfilePictureURL" style="max-width:50px"/>
+                                <br/>
+                                    
+                                <a asp-controller="Artists" asp-action="Details" asp-route-id="@artist.ArtistId">@artist.Artist.Title</a>
+                            </div>
+                        }
+                    </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer bg-white text-dark border-0">
+                            <p class="card-text">
+                                <a class="btn btn-outline-primary float-right" asp-action="Index">
+                                    <i class="bi bi-arrow-return-left"></i> Back to events
+                                </a>
+                                <a class="btn btn-success text-white">
+                                    @((DateTime.Now > Model.EndDate) ? "disabled" : "")
+                                    <i class="bi bi-cart-plus">Add to Cart (@(Model.TicketPrice)€)</i>
+                                </a>
+                                <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pen"></i>Edit</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>

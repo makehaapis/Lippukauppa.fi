@@ -12,6 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IArtistsService, ArtistsService>();
 builder.Services.AddScoped<IVenuesService, VenuesService>();
+builder.Services.AddScoped<IEventsService, EventsService>();
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
@@ -34,6 +35,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-//AppDbInitializer.Seed(app);
+AppDbInitializer.Seed(app);
 
 app.Run();

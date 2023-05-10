@@ -6,109 +6,232 @@ namespace Lippukauppa.fi.Data
     {
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
-            using (var servicesScope = applicationBuilder.ApplicationServices.CreateScope())
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
-                var context = servicesScope.ServiceProvider.GetService<AppDbContext>();
+                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+
                 context.Database.EnsureCreated();
 
-                //Location
+                //Venue
                 if (!context.Venues.Any())
                 {
                     context.Venues.AddRange(new List<Venue>()
                     {
                         new Venue()
                         {
-                            VenuePictureURL = "https://image.newyork.fi/wp-content/uploads/2015/03/Madison-Square-Garden-in-New-York.jpg",
-                            Name = "Madison Square Garden",
-                            Description = "Experience the unforgettable at Madison Square Garden, where history happens at The World's Most Famous Arena.",
-                            Address = "Hämeenkatu 1",
-                            PostalCode = "01000",
+                            Name = "Arena 1",
+                            VenuePictureURL = "",
+                            Description = "This is the description of the first arena",
+                            Address = "Uudenmaankatu 1",
+                            PostalCode = "05000",
                             City = "Helsinki"
                         },
-
                         new Venue()
                         {
-                            VenuePictureURL = "https://www.ilves.com/wp-content/uploads/2021/11/nokia-areena.jpg",
-                            Name = "Nokia areena",
-                            Description = "Nokia Arena on 15 000 katsojapaikkaa tarjoava elämysareena Tampereen sydämessä. Areenan yhteydessä toimii myös huippuluokan hotelli, kansainvälinen kasino, monipuoliset kokous- ja tapahtumatilat sekä lukuisia ravintoloita. Tarjoamme uniikin tapahtumakokemuksen, jollaista ei saa mistään muualta.",
-                            Address = "Hämeenkatu 1",
-                            PostalCode = "01000",
+                            Name = "Arena 2",
+                            VenuePictureURL = "",
+                            Description = "This is the description of the second arena",
+                            Address = "Uudenmaankatu 2",
+                            PostalCode = "05000",
                             City = "Helsinki"
                         },
-
                         new Venue()
                         {
-                            VenuePictureURL = "https://files.venuu.se/attachments/000/121/960/a9de00fadeca6af04e4bdb7cfdb9695b9dab2b60.jpg",
-                            Name = "Kantolan Tapahtumapuisto",
-                            Description = "Kantolan tapahtumapuisto sijaitsee Hämeenlinnassa, noin tunnin matkan päässä Helsingistä ja Tampereelta. Järven rannalla sijaitseva 9,5 hehtaarin kokoinen vehreä puistoalue toimii monipuolisten tapahtumien näyttämönä.",
-                            Address = "Hämeenkatu 1",
-                            PostalCode = "01000",
+                            Name = "Arena 3",
+                            VenuePictureURL = "",
+                            Description = "This is the description of the third arena",
+                            Address = "Uudenmaankatu 3",
+                            PostalCode = "05000",
+                            City = "Helsinki"
+                        },
+                        new Venue()
+                        {
+                            Name = "Arena 4",
+                            VenuePictureURL = "",
+                            Description = "This is the description of the fourth arena",
+                            Address = "Uudenmaankatu 4",
+                            PostalCode = "05000",
+                            City = "Helsinki"
+                        },
+                        new Venue()
+                        {
+                            Name = "Arena 5",
+                            VenuePictureURL = "",
+                            Description = "This is the description of the fifth arena",
+                            Address = "Uudenmaankatu 5",
+                            PostalCode = "05000",
                             City = "Helsinki"
                         },
                     });
                     context.SaveChanges();
                 }
-
-                //Artist
+                //Artists
                 if (!context.Artists.Any())
                 {
-                    context.Artists.AddRange(new List<Artist>() {
-                        new Artist
+                    context.Artists.AddRange(new List<Artist>()
+                    {
+                        new Artist()
                         {
-                            Title = "Antti Tuisku",
-                            ProfilePictureURL = "http://www.tiketti.fi/kuvat/EV78412_7_768x470.jpg",
-                            Description = "Suomen kirkkain poptähti Antti Tuisku julkaisi vuoden 2021 alussa uuden Treenaa-singlen, jota seurasivat toinen sinkku Kipee ja seitsemän biisin MASTER WORKOUT -EP. Siinä missä helmikuussa 2020 ilmestyneellä Valittu kansa -albumilla Antti pohti elämän hengellistä puolta, käsittelevät uudet kappaleet fyysistä laitaa. Yhteistä julkaisuilla on kuitenkin yhteiskunnallisesti kantaaottava ja syvällinen teema, jossa on mukana Antille ominaista itseironiaa.",
+                            Title = "Actor 1",
+                            Description = "This is the Bio of the first actor",
+                            ProfilePictureURL = ""
                         },
-                        new Artist
+                        new Artist()
                         {
-                            Title = "Arch Enemy",
-                            ProfilePictureURL = "https://www.soundi.fi/wp-content/uploads/2017/10/arch-enemy-2017-800x533.jpg",
-                            Description = "Arch Enemy on ruotsalainen melodinen death metal -yhtye, jonka Michael Amott perusti vuonna 1995. Yhtye on julkaissut kymmenen studioalbumia, kolme livealbumia sekä neljä EP:tä",
+                            Title = "Actor 2",
+                            Description = "This is the Bio of the second actor",
+                            ProfilePictureURL = ""
+                        },
+                        new Artist()
+                        {
+                            Title = "Actor 3",
+                            Description = "This is the Bio of the third actor",
+                            ProfilePictureURL = ""
+                        },
+                        new Artist()
+                        {
+                            Title = "Actor 4",
+                            Description = "This is the Bio of the fourth actor",
+                            ProfilePictureURL = ""
+                        },
+                        new Artist()
+                        {
+                            Title = "Actor 5",
+                            Description = "This is the Bio of the fifth actor",
+                            ProfilePictureURL = ""
                         },
                     });
                     context.SaveChanges();
                 }
-
-                //Event
+                
+                //Events
                 if (!context.Events.Any())
                 {
                     context.Events.AddRange(new List<Event>()
                     {
-                        new Event
+                        new Event()
                         {
-                            Name = "Puisto Blues",
-                            Description = "Legendaarinen festivaali",
-                            TicketPrice = 20.90,
-                            StartDate = DateTime.Parse("29/01/2023"),
-                            EndDate = DateTime.Parse("29/01/2023"),
-                            SellStartDate = DateTime.Parse("29/01/2023"),
-
-                            ImageUrl =  ""
-                        },
-                        new Event
-                        {
-                            Name = "Puisto Blues",
-                            Description = "Legendaarinen festivaali",
-                            TicketPrice = 59.90,
-                            StartDate = DateTime.Parse("29/01/2023"),
-                            EndDate = DateTime.Parse("29/01/2023"),
-                            SellStartDate = DateTime.Parse("29/01/2023"),
-                            ImageUrl =  ""
-                        },
-                        new Event
-                        {
-                            Name = "Puisto Blues",
-                            Description = "Legendaarinen festivaali",
+                            Name = "Life",
+                            Description = "This is the Life movie description",
                             TicketPrice = 39.50,
-                            StartDate = DateTime.Parse("29/01/2023"),
-                            EndDate = DateTime.Parse("29/01/2023"),
-                            SellStartDate = DateTime.Parse("29/01/2023"),
-                            ImageUrl =  "https://www.lippu.fi/obj/media/FI-eventim/teaser/evo/1x1/2022/WT_amore156x198.jpg",
+                            ImageURL = "http://dotnethow.net/images/movies/movie-3.jpeg",
+                            StartDate = DateTime.Now.AddDays(-10),
+                            EndDate = DateTime.Now.AddDays(10),
+                            SellStartDate = DateTime.Now.AddDays(-10),
+                            VenueId = 1,
+                            TicketQuantity = 1000,
+                        },
+                        new Event()
+                        {
+                            Name = "Life",
+                            Description = "This is the Life movie description",
+                            TicketPrice = 39.50,
+                            ImageURL = "http://dotnethow.net/images/movies/movie-3.jpeg",
+                            StartDate = DateTime.Now.AddDays(-10),
+                            EndDate = DateTime.Now.AddDays(10),
+                            SellStartDate = DateTime.Now.AddDays(-10),
+                            VenueId = 3,
+                            TicketQuantity = 1000,
+                        },
+                        new Event()
+                        {
+                            Name = "Life",
+                            Description = "This is the Life movie description",
+                            TicketPrice = 39.50,
+                            ImageURL = "http://dotnethow.net/images/movies/movie-3.jpeg",
+                            StartDate = DateTime.Now.AddDays(-10),
+                            EndDate = DateTime.Now.AddDays(10),
+                            SellStartDate = DateTime.Now.AddDays(-10),
+                            VenueId = 2,
+                            TicketQuantity = 1000,
+                        },
+                        new Event()
+                        {
+                            Name = "Life",
+                            Description = "This is the Life movie description",
+                            TicketPrice = 39.50,
+                            ImageURL = "http://dotnethow.net/images/movies/movie-3.jpeg",
+                            StartDate = DateTime.Now.AddDays(-10),
+                            EndDate = DateTime.Now.AddDays(10),
+                            SellStartDate = DateTime.Now.AddDays(-10),
+                            VenueId = 1,
+                            TicketQuantity = 1000,
+                        },
+                        new Event()
+                        {
+                            Name = "Life",
+                            Description = "This is the Life movie description",
+                            TicketPrice = 39.50,
+                            ImageURL = "http://dotnethow.net/images/movies/movie-3.jpeg",
+                            StartDate = DateTime.Now.AddDays(-10),
+                            EndDate = DateTime.Now.AddDays(10),
+                            SellStartDate = DateTime.Now.AddDays(-10),
+                            VenueId = 1,
+                            TicketQuantity = 1000,
+                        },
+                        new Event()
+                        {
+                            Name = "Life",
+                            Description = "This is the Life movie description",
+                            TicketPrice = 39.50,
+                            ImageURL = "http://dotnethow.net/images/movies/movie-3.jpeg",
+                            StartDate = DateTime.Now.AddDays(-10),
+                            EndDate = DateTime.Now.AddDays(10),
+                            SellStartDate = DateTime.Now.AddDays(-10),
+                            VenueId = 2,
+                            TicketQuantity = 1000,
                         },
                     });
                     context.SaveChanges();
                 }
+                //Actors & Movies
+                if (!context.Artists_Events.Any())
+                {
+                    context.Artists_Events.AddRange(new List<Artist_Event>()
+                    {
+                        new Artist_Event()
+                        {
+                            ArtistId = 1,
+                            EventId = 1
+                        },
+                        new Artist_Event()
+                        {
+                            ArtistId = 3,
+                            EventId = 1
+                        },
+                         new Artist_Event()
+                        {
+                            ArtistId = 1,
+                            EventId = 2
+                        },
+                         new Artist_Event () 
+                        { 
+                             ArtistId = 4, EventId = 2 
+                         },
+                        new Artist_Event () { ArtistId = 1, EventId = 3 },
+                        new Artist_Event () { ArtistId = 2, EventId = 3 },
+                        new Artist_Event () { ArtistId = 5, EventId = 3 },
+
+
+                        new Artist_Event () { ArtistId = 2, EventId = 4 },
+                        new Artist_Event () { ArtistId = 3, EventId = 4 },
+                        new Artist_Event () { ArtistId = 4, EventId = 4 },
+
+
+                        new Artist_Event () { ArtistId = 2, EventId = 5 },
+                        new Artist_Event () { ArtistId = 3, EventId = 5 },
+                        new Artist_Event () { ArtistId = 4, EventId = 5 },
+                        new Artist_Event () { ArtistId = 5, EventId = 5 },
+
+
+                        new Artist_Event () { ArtistId = 3, EventId = 6 },
+                        new Artist_Event () { ArtistId = 4, EventId = 6 },
+                        new Artist_Event () { ArtistId = 5, EventId = 6 },
+                    });
+                    context.SaveChanges();
+                }
             }
+
         }
     }
 }

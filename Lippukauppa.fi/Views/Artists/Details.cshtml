@@ -1,7 +1,7 @@
 ﻿@model Artist
 
 @{
-    ViewData["Title"] = "Delete Artist";
+    ViewData["Title"] = "Details for Artist";
 }
 
 <div class="row text">
@@ -29,12 +29,21 @@
                         <input asp-for="Description" class="form-control" readonly/>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
-                     <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-outline-success float-right" />
-                    <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="Model.ArtistId"><i class="bi bi-pen"></i>Edit</a>
+
+                <div class="row">
+                    @foreach (var eventti in Model.Artists_Events)
+                    {
+                        <div class="columns text-center">
+                            <img class="border-info rounded-0" src="@eventti.Event.ImageURL" style="max-width:150px" />
+                            <br />
+                            <a asp-controller="Artists" asp-action="Details" asp-route-id="@eventti.Event.Id">@eventti.Event.Name</a>
+                        </div>
+                    }
+                    <div class="form-group">
+                    <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="Id"><i class="bi bi-pen"></i>Edit</a>
                     <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
                 </div>
-
+                </div>
             </div>
         </div>
     </div>

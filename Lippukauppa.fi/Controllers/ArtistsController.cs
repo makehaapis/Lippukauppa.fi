@@ -21,6 +21,14 @@ namespace Lippukauppa.fi.Controllers
             return View(allArtists);
         }
 
+
+        //GET: Artists/Details/id
+        public async Task<IActionResult> Details(int id)
+        {
+            var artistDetail = await _service.GetArtistByIdAsync(id);
+            return View(artistDetail);
+        }
+        
         public IActionResult Create()
         {
             return View();
@@ -34,13 +42,6 @@ namespace Lippukauppa.fi.Controllers
             }
             await _service.AddAsync(artist);
             return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var artistDetails = await _service.GetByIdAsync(id);
-            if (artistDetails == null) return View("NotFound");
-            return View(artistDetails);
         }
 
         //Get: Artists/Edit/id
