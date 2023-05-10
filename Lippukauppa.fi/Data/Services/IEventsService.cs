@@ -10,5 +10,6 @@ namespace Lippukauppa.fi.Data.Services
         Task<Event> GetEventByIdAsync(int id);
         Task<NewEventDropdownsVM> GetNewEventDropdownsValues();
         Task AddNewEventAsync(NewEventVM data);
+        Task UpdateEventAsync(int id, NewEventVM data);
     }
 }
