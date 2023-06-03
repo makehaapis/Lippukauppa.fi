@@ -5,7 +5,7 @@ namespace Lippukauppa.fi.Data.Services
 {
     public class VenuesService : EntityBaseRepository<Venue>, IVenuesService
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext context;
         public VenuesService(AppDbContext context) : base(context) { }
     }
 }

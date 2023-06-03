@@ -9,10 +9,19 @@ namespace Lippukauppa.fi.Controllers
     {
         private readonly IEventsService _eventsService;
         private readonly ShoppingCart _shoppingCart;
-        public OrdersController(IEventsService eventsService, ShoppingCart shoppingCart)
+        private readonly IOrdersService _ordersService;
+        public OrdersController(IEventsService eventsService, ShoppingCart shoppingCart, IOrdersService ordersService)
         {
             _eventsService= eventsService;
             _shoppingCart = shoppingCart;
+            _ordersService = ordersService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            string userId = "";
+            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            return View(orders);
         }
 
         public IActionResult ShoppingCart()
@@ -44,6 +53,17 @@ namespace Lippukauppa.fi.Controllers
                 _shoppingCart.RemoveItemFromCart(item);
             }
             return RedirectToAction(nameof(ShoppingCart));
+        }
+
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = _shoppingCart.GetShoppingCartItems();
+            string userId = "";
+            string userEmailAddress = "";
+
+            await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
+            await _shoppingCart.ClearShoppingCartAsync();
+            return View("OrderCompleted");
         }
     }
 }

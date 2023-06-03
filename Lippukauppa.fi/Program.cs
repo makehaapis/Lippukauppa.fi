@@ -14,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IArtistsService, ArtistsService>();
 builder.Services.AddScoped<IVenuesService, VenuesService>();
 builder.Services.AddScoped<IEventsService, EventsService>();
+builder.Services.AddScoped<IOrdersService, OrdersService>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
