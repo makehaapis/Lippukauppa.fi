@@ -1,9 +1,10 @@
 ﻿using Lippukauppa.fi.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lippukauppa.fi.Data
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -16,6 +17,7 @@ namespace Lippukauppa.fi.Data
                 ae.ArtistId,
                 ae.EventId
             });
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<Venue> Venues { get; set; }
         public DbSet<Artist> Artists { get; set; }
