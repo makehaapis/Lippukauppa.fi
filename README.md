@@ -1,6 +1,6 @@
 # Lippukauppa.fi
 
-This is ASP.NET CORE E-Commerce application for selling tickets for events. Data is saved into SQL database. Razor views handles the frontend UI.  
+ASP.NET CORE MVC E-commerce application for selling event tickets with paypal integration.
 
 You can find my demo of this project running in Azure Here:  
 + https://lippukauppa.azurewebsites.net
