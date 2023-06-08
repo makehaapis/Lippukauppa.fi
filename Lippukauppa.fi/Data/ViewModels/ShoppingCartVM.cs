@@ -6,5 +6,6 @@ namespace Lippukauppa.fi.Data.ViewModels
     {
         public ShoppingCart ShoppingCart { get; set; }
         public double ShoppingCartTotal { get; set; }
+        public string ShoppingCartTotalToString { get; set; }
     }
 }

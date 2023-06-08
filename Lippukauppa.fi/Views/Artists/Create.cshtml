@@ -1,13 +1,13 @@
 ﻿@model Artist
 
 @{
-    ViewData["Title"] = "Add a new artist";
+    ViewData["Title"] = "Lisää uusi artisti";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Add a New Artist</h1>
+            <h1>Lisää uusi artisti</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -18,24 +18,24 @@
                         <img id="ProfilePicturePreview" class="border-info rounded-0" style="max-width: 250px" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ProfilePictureURL" class="control-label"></label>
+                        <label asp-for="ProfilePictureURL" class="control-label">Kuvan URL</label>
                         <input asp-for="ProfilePictureURL" class="form-control" />
                         <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Title" class="control-label"></label>
+                        <label asp-for="Title" class="control-label">Nimi</label>
                         <input asp-for="Title" class="form-control" />
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" />
+                        <label asp-for="Description" class="control-label">Kuvaus</label>
+                        <textarea asp-for="Description" class="form-control" rows="10"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-outline-success float-right" />
-                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                        <a class="btn btn-outline-secondary" asp-action="Index">Näytä kaikki</a>
                     </div>
                 </form>
             </div>

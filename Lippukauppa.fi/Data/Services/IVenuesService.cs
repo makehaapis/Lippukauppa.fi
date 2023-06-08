@@ -5,6 +5,6 @@ namespace Lippukauppa.fi.Data.Services
 {
     public interface IVenuesService : IEntityBaseRepository<Venue>
     {
-
+        Task<Venue> GetVenueByIdAsync(int id);
     }
 }

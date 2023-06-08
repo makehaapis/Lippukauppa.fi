@@ -2,63 +2,99 @@
 
 @{
     ViewData["Title"] = "Events";
+    int counter = 0;
 }
 
-<div class="row">
+<div class="row g-0">
     @foreach (var item in Model)
     {
-        <div class="col-md-4 col-xs-6 mb-3">
-            <div class="card mb-3 border-1" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-6">
-                        <img src="@item.ImageURL" width="100%" alt="@item.Name">
+        if (counter < 4) {
+            <div class="col-xl-3 mb-3 g-0 p-1 border-1">
+                <div class="card" style="min-height: 400px;">
+                    <div class="card-header g-0 p-0 m-0">
+                        <a class="col-md-12 m-0 p-0 g-0" asp-action="Details" asp-route-id="@item.Id">
+                            <img src="@item.ImageURL" width="100%" alt="@item.Name">
+                        </a>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <h5 class="card-title">
-                                    @item.Name
-                                </h5>
-                            </p>
-                            <p class="card-text"><b>Venue: </b>@item.venue.Name</p>
-                            <p class="card-text">@item.Description</p>
-                            <p class="card-text"><b>Start Date: </b>@item.StartDate.ToString("dd MMM yy")</p>
-                            <p class="card-text"><b>End Date: </b>@item.EndDate.ToString("dd MMM yy")</p>
-                            <p class="card-text ">
-                                <b>Status: </b>
-                                @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
-                                {
-                                    <span class="badge bg-success text-white">AVAILABLE</span>
-                                }
-                                else if (DateTime.Now > item.EndDate)
-                                {
-                                    <span class="badge bg-danger text-white">EXPIRED</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-primary text-white">UPCOMING</span>
-                                }
-                            </p>
+                    <div class="card-body text-center">
+                        <p class="card-title card-textfont-weight-bold">@item.Name</p>
+                        <p class="card-text">@item.venue.Name</p>
+                        @if (item.StartDate.ToString("dd MMMyy") != item.EndDate.ToString("dd MMMyy")) {
+                            <p class="card-text">@item.StartDate.ToString("dd MMMyy") - @item.EndDate.ToString("dd MMMyy")</p>
+                        }
+                            else
+                            {
+                                <p class="card-text">@item.StartDate.ToString("dd MMMyy")</p>
+                            }
+     
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card-footer bg-white text-dark border-0">
-                            <p class="card-text">
-                                <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id">
-                                    <i class="bi bi-eye-fill"></i> Show Details
+                    <div class="card-footer bg-white text-dark border-0">
+                        <p class="card-text text-center">
+                            @if (DateTime.Now <= item.StartDate && DateTime.Now >= item.SellStartDate)
+                            {
+                                <a class="btn-sm btn-success text-white" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id="@item.Id">
+                                    <i class="bi bi-cart-plus">Osta lippu</i>
                                 </a>
-                                <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id="@item.Id">
-                                    @((DateTime.Now > item.EndDate) ? "disabled" : "")
-                                    <i class="bi bi-cart-plus">Add to Cart (@(item.TicketPrice)€)</i>
+                            }
+                            else if (DateTime.Now > item.SellStartDate && DateTime.Now <= item.EndDate)
+                            {
+                                <a class="btn-sm btn-danger text-white">
+                                    <i class="bi bi-cart-plus">Tulossa</i>
                                 </a>
-                            </p>
-                        </div>
+                            }
+                            else
+                            {
+                                 <a class="btn-sm btn-danger text-white">
+                                    <i class="bi bi-cart-plus">Päättynyt</i>
+                                </a>
+                            }
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
+            counter++;
+        }
+        else
+        {
+            <div class="col-xl-12 col-lg-12 mb-3 g-0 p-1 border-1">
+                <div class="card" style="min-height: 600px;">
+                    <div class="card-header g-0 p-0 m-0">
+                        <a class="col-md-12 m-0 p-0 g-0" asp-action="Details" asp-route-id="@item.Id">
+                                <img class="w-100" src="@item.WideImageURL" alt="@item.Name">
+                        </a>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="card-title card-textfont-weight-bold">@item.Name</p>
+                        <p class="card-text">@item.venue.Name</p>
+                        @if (item.StartDate.ToString("dd MMMyy") != item.EndDate.ToString("dd MMMyy"))
+                        {
+                            <p class="card-text">@item.StartDate.ToString("dd MMMyy") - @item.EndDate.ToString("dd MMMyy")</p>
+                        }
+                        else
+                        {
+                            <p class="card-text">@item.StartDate.ToString("dd MMMyy")</p>
+                        }
+                    </div>
+                    <div class="card-footer bg-white text-dark border-0">
+                        <p class="card-text text-center">
+                            @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
+                            {
+                                <a class="btn-sm btn-success text-white" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id="@item.Id">
+                                    <i class="bi bi-cart-plus">Osta lippu</i>
+                                </a>
+                            }
+                            else if (DateTime.Now > item.SellStartDate)
+                            {
+                                <a class="btn-sm btn-danger text-white">
+                                    <i class="bi bi-cart-plus">Tulossa</i>
+                                </a>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+            counter = 0;
+        }
     }
     @await Html.PartialAsync("_CreateItem", "Events")
 </div>
-
-

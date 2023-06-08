@@ -1,6 +1,8 @@
 ﻿using Lippukauppa.fi.Data;
 using Lippukauppa.fi.Data.Services;
+using Lippukauppa.fi.Data.Static;
 using Lippukauppa.fi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@ using System.Diagnostics.Tracing;
 
 namespace Lippukauppa.fi.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class EventsController : Controller
     {
         private readonly IEventsService _service;
@@ -17,25 +20,30 @@ namespace Lippukauppa.fi.Controllers
         {
             _service = service;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allEvents = await _service.GetAllAsync(n => n.venue);
-            return View(allEvents);
+            var filteredEvents = allEvents.Where(n => n.EndDate > DateTime.UtcNow); 
+            return View(filteredEvents);
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Filter(string searchString)
         {
             var allEvents = await _service.GetAllAsync(n => n.venue);
 
             if (!String.IsNullOrEmpty(searchString)) 
             {
-                var filteredEvents = allEvents.Where(e => e.Name.Contains(searchString)).ToList();
+                var filteredEvents = allEvents.Where(e => e.Name.ToLower().Contains(searchString.ToLower())).ToList();
                 return View("Index", filteredEvents);
             }
             return View("Index",allEvents);
         }
 
-
         //GET: Events/Details/id
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var eventDetail = await _service.GetEventByIdAsync(id);
@@ -97,6 +105,7 @@ namespace Lippukauppa.fi.Controllers
                 StartDate = eventDetails.StartDate,
                 EndDate = eventDetails.EndDate,
                 ImageURL = eventDetails.ImageURL,
+                WideImageURL = eventDetails.WideImageURL,
                 VenueId = eventDetails.VenueId,
                 ArtistIDs = eventDetails.Artists_Events.Select(n => n.ArtistId).ToList(),
             };
@@ -106,6 +115,7 @@ namespace Lippukauppa.fi.Controllers
             ViewBag.Artists = new SelectList(eventDropdownsData.Artists, "Id", "Title");
             return View(response);
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(int id, NewEventVM eventti)
         {

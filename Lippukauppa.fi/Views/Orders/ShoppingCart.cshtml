@@ -38,18 +38,20 @@
                 <tr>
                     <td colspan="2"></td>
                     <td><b>Total:</b></td>
-                    <td>@Model.ShoppingCartTotal.ToString("c")</td>
+                    <td id="#Total">@Model.ShoppingCartTotal.ToString("c")</td>
                     <td></td>
                 </tr>
             </tfoot>
         </table>
         <div class="text-right">
             <div class="btn-group">
-                @*<a class="btn btn-outline-primary" asp-action="CompleteOrder">
-                    Complete order
-                </a>*@
-                <div id="paypal-btn">
-                </div>
+                @if(User.Identity.IsAuthenticated) {
+                    <div id="paypal-btn"></div>
+                }
+                else
+                {
+                   <a class="btn btn-outline-danger" asp-controller="Account" asp-action="Login">Kirjaudu sisään</a>
+                }
                 <span style="padding:5px"></span>
                 <a class="btn btn-outline-success" asp-controller="Events" asp-action="Index">
                     Add more items
@@ -64,15 +66,7 @@
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
     <script>
-
-        let _total = @Html.Raw(Model.ShoppingCartTotal);
-        try {
-            _total.replace(',', '.')
-        }
-        catch(err) {
-            let _total = @Html.Raw(Model.ShoppingCartTotal);
-        }
-
+        let _total = @Html.Raw(Model.ShoppingCartTotalToString)
         paypal.Button.render({
             //Configure environment
             env: 'sandbox',

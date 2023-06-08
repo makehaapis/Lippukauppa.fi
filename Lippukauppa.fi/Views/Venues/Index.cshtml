@@ -1,53 +1,42 @@
 ﻿@model IEnumerable<Venue>
 @{
-    ViewData["Title"] = "Venues";
+    ViewData["Title"] = "Tapahtumapaikat";
 }
-
 <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-lg-12">
 
         <table class="table">
             <thead>
-                <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.VenuePictureURL)</th>
-                    <th>@Html.DisplayNameFor(model => model.Name)</th>
-                    <th>@Html.DisplayNameFor(model => model.Description)</th>
-                    <th>@Html.DisplayNameFor(model => model.Address)</th>
-                    <th>@Html.DisplayNameFor(model => model.PostalCode)</th>
-                    <th>@Html.DisplayNameFor(model => model.City)</th>
+                <tr class="text-left">
+                    <th>Kuvan URL</th>
+                    <th>Nimi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
-                { 
-                <tr>
-                    <td class="align-middle">
-                        <img class="rounded-circle" src="@item.VenuePictureURL" alt="@item.Name" style="max-width: 150px" />
-                    </td>
-                    <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td class="align-middle" style="width:33.33%">
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.Address)
-                     </td>
-                     <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.PostalCode)
-                     </td>
-                     <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.City)
-                     </td>
-                     <td class="align-middle">
-                        <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a>
-                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a>
-                        <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>
-                    </td>
-                </tr>
+                {
+                    <tr>
+                        <td class="text-left">
+                            @if(item.VenuePictureURL == "" || item.VenuePictureURL == null) {
+                            <img class="border-info rounded-0" src="https://www.tiketti.fi/kuvat/EV90531_7_768x470.jpg" alt="@item.Name" style="max-width: 150px" />
+                            }
+                            else {
+                            <img class="border-info rounded-0" src="@item.VenuePictureURL" alt="@item.Name" style="max-width: 150px" />
+                                }
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="align-middle"><a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a></td>
+                            <td class="align-middle"><a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a></td>
+                            <td class="align-middle"> <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a></td>
+                        }
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
+    @await Html.PartialAsync("_CreateItem", "Venues")
 </div>
-@await Html.PartialAsync("_CreateItem", "Venues")

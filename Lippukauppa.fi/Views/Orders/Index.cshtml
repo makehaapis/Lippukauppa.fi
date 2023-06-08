@@ -15,7 +15,9 @@
                 <th>Order ID</th>
                 <th>Items</th>
                 <th>Total</th>
-                <th>User</th>
+                @if(User.Identity.IsAuthenticated && User.IsInRole("Admin")) {
+                    <th>User</th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -38,7 +40,10 @@
                     <td class="aling-middle">
                         @order.OrderItems.Select(e => e.Event.TicketPrice * e.Amount).Sum().ToString("c")
                     </td>
-                    <td class="aling-middle"> - </td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <td class="aling-middle"> @order.User.Email</td>
+                    }
                 </tr>
             }
         </tbody>

@@ -1,12 +1,15 @@
 ﻿using Lippukauppa.fi.Data;
 using Lippukauppa.fi.Data.Services;
+using Lippukauppa.fi.Data.Static;
 using Lippukauppa.fi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Lippukauppa.fi.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ArtistsController : Controller
     {
         private readonly IArtistsService _service;
@@ -15,13 +18,15 @@ namespace Lippukauppa.fi.Controllers
         {
             _service = service;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allArtists = await _service.GetAllAsync();
             return View(allArtists);
         }
 
-
+        [AllowAnonymous]
         //GET: Artists/Details/id
         public async Task<IActionResult> Details(int id)
         {

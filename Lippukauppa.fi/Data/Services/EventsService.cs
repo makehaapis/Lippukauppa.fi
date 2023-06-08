@@ -20,6 +20,7 @@ namespace Lippukauppa.fi.Data.Services
                 Name = data.Name,
                 Description= data.Description,
                 ImageURL = data.ImageURL,
+                WideImageURL = data.WideImageURL,
                 TicketPrice = data.TicketPrice,
                 StartDate = data.StartDate,
                 EndDate = data.EndDate,
@@ -67,6 +68,7 @@ namespace Lippukauppa.fi.Data.Services
                 dbEvent.Name = data.Name;
                 dbEvent.Description = data.Description;
                 dbEvent.ImageURL = data.ImageURL;
+                dbEvent.WideImageURL = data.WideImageURL;
                 dbEvent.TicketPrice = data.TicketPrice;
                 dbEvent.StartDate = data.StartDate;
                 dbEvent.EndDate = data.EndDate;

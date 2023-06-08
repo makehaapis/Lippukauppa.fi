@@ -1,10 +1,14 @@
 ﻿using Lippukauppa.fi.Data.Cart;
 using Lippukauppa.fi.Data.Services;
+using Lippukauppa.fi.Data.Static;
 using Lippukauppa.fi.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Lippukauppa.fi.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IEventsService _eventsService;
@@ -19,8 +23,9 @@ namespace Lippukauppa.fi.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string userId = "";
-            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userId, userRole);
             return View(orders);
         }
 
@@ -32,6 +37,7 @@ namespace Lippukauppa.fi.Controllers
             {
                 ShoppingCart = _shoppingCart,
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal(),
+                ShoppingCartTotalToString = _shoppingCart.GetShoppingCartTotal().ToString().Replace(",",".")
             };
             return View(response);
         }
@@ -58,9 +64,8 @@ namespace Lippukauppa.fi.Controllers
         public async Task<IActionResult> CompleteOrder()
         {
             var items = _shoppingCart.GetShoppingCartItems();
-            string userId = "";
-            string userEmailAddress = "";
-
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
             await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
             await _shoppingCart.ClearShoppingCartAsync();
             return View("OrderCompleted");

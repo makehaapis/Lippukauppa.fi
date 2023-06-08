@@ -1,12 +1,12 @@
 ﻿@model Venue
 @{
-    ViewData["Title"] = "Edit venue";
+    ViewData["Title"] = "Muokkaa tapahtumapaikkaa";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Edit Artist</h1>
+            <h1>Muokkaa tapahtumapaikkaa</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -14,39 +14,39 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group">
-                        <label asp-for="VenuePictureURL" class="control-label"></label>
+                        <label asp-for="VenuePictureURL" class="control-label">Kuvan URL</label>
                         <input asp-for="VenuePictureURL" class="form-control" />
                         <span asp-validation-for="VenuePictureURL" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
+                        <label asp-for="Name" class="control-label">Nimi</label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" />
+                        <label asp-for="Description" class="control-label">Kuvaus</label>
+                        <textarea asp-for="Description" class="form-control" rows="10"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Address" class="control-label"></label>
+                        <label asp-for="Address" class="control-label">Osoite</label>
                         <input asp-for="Address" class="form-control" />
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="PostalCode" class="control-label"></label>
+                        <label asp-for="PostalCode" class="control-label">Postinumero</label>
                         <input asp-for="PostalCode" class="form-control" />
                         <span asp-validation-for="PostalCode" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="City" class="control-label"></label>
+                        <label asp-for="City" class="control-label">Kaupunki</label>
                         <input asp-for="City" class="form-control"/>
                         <span asp-validation-for="City" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <input type="submit" value="Update" class="btn btn-outline-success float-right" />
-                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                        <a class="btn btn-outline-secondary" asp-action="Index">Näytä kaikki</a>
                     </div>
                 </form>
             </div>

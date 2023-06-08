@@ -1,13 +1,13 @@
 ﻿@model NewEventVM
 
 @{
-    ViewData["Title"] = "Edit Event";
+    ViewData["Title"] = "Muokkaa tapahtumaa";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Add New Event</h1>
+            <h1>Muokkaa tapahtumaa</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -17,53 +17,61 @@
                     <div class="form-group text-center">
                         <img id="ImageURLPreview" class="border-info rounded-0" style="max-width: 250px" />
                     </div>
+                    <div class="form-group text-center">
+                        <img id="WideImageURLPreview" class="border-info rounded-0" style="max-width: 250px" />
+                    </div>
                     <div class="form-group">
-                        <label asp-for="ImageURL" class="control-label"></label>
+                        <label asp-for="ImageURL" class="control-label">Kuvan URL</label>
                         <input asp-for="ImageURL" class="form-control" />
                         <span asp-validation-for="ImageURL" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
+                        <label asp-for="WideImageURL" class="control-label">Leveän kuvan URL</label>
+                        <input asp-for="WideImageURL" class="form-control" />
+                        <span asp-validation-for="WideImageURL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Nimi</label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" />
+                        <label asp-for="Description" class="control-label">Kuvaus</label>
+                         <textarea asp-for="Description" class="form-control" rows="10"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="TicketPrice" class="control-label"></label>
+                        <label asp-for="TicketPrice" class="control-label">Lipun hinta</label>
                         <input asp-for="TicketPrice" class="form-control" />
                         <span asp-validation-for="TicketPrice" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="StartDate" class="control-label"></label>
+                        <label asp-for="StartDate" class="control-label">Aloitus päivämäärä</label>
                         <input asp-for="StartDate" type="date" class="form-control" />
                         <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="EndDate" class="control-label"></label>
+                        <label asp-for="EndDate" class="control-label">Lopetus päivämäärä</label>
                         <input asp-for="EndDate" type="date" class="form-control" />
                         <span asp-validation-for="EndDate" class="text-danger"></span>
                     </div>
                      <div class="form-group">
-                        <label asp-for="SellStartDate" class="control-label"></label>
+                        <label asp-for="SellStartDate" class="control-label">Lipunmyynnin aloitus</label>
                         <input asp-for="SellStartDate" type="date" class="form-control" />
                         <span asp-validation-for="SellStartDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="VenueId" class="control-label"></label>
+                        <label asp-for="VenueId" class="control-label">Tapahtumapaikka</label>
                         <select asp-for="VenueId" class="form-control" asp-items="ViewBag.Venues"></select>
                         <span asp-validation-for="VenueId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ArtistIDs" class="control-label"></label>
+                        <label asp-for="ArtistIDs" class="control-label">Artistit</label>
                         <select asp-for="ArtistIDs" class="form-control" asp-items="ViewBag.Artists" multiple></select>
                         <span asp-validation-for="ArtistIDs" class="text-danger"></span>
                     </div>
                      <div class="form-group">
-                        <label asp-for="TicketQuantity" class="control-label"></label>
+                        <label asp-for="TicketQuantity" class="control-label">Lippujen määrä</label>
                         <input asp-for="TicketQuantity" class="form-control" />
                         <span asp-validation-for="TicketQuantity" class="text-danger"></span>
                     </div>
@@ -83,9 +91,15 @@
         $(document).ready(function () {
             var output = document.getElementById('ImageURLPreview');
             output.src = $("#ImageURL").val();
+            var wideoutput = document.getElementById('WideImageURLPreview');
+            wideoutput.src = $("#WideImageURL").val();
         })
         $("#ImageURL").on("change", function () {
             var output = document.getElementById('ImageURLPreview');
+            output.src = $(this).val();
+        })
+        $("#WideImageURL").on("change", function () {
+            var output = document.getElementById('WideImageURLPreview');
             output.src = $(this).val();
         })
     </script>

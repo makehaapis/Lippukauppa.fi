@@ -10,26 +10,28 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container w-75 m-auto">
                 <a class="navbar-brand" asp-controller="Events" asp-action="Index">Lippukauppa.fi</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse  justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index"><i class="bi bi-speakaer"></i> Events</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index"><i class="bi bi-speakaer"></i> Tapahtumat</a>
                         </li>
+                        @if(User.Identity.IsAuthenticated && User.IsInRole("Admin")) {
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="bi bi-gear"></i> Management
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Artists" asp-action="Index"><i class="bi bi-person-heart"></i> Artists</a>
-                                <a class="dropdown-item" asp-controller="Venues" asp-action="Index"><i class="bi bi-geo-alt-fill"></i> Venues</a>
+                                <a class="dropdown-item" asp-controller="Artists" asp-action="Index"> Artistit</a>
+                                <a class="dropdown-item" asp-controller="Venues" asp-action="Index"> Tapahtumapaikat</a>
                                 </div>
-                            </li>
+                        </li>
+                        }
                     </ul>
 
                     <form class="form-inline my-2 my-lg-1 ml-auto mr-auto" asp-controller="Events" asp-action="Filter" style="padding-right: 25px;">
@@ -39,14 +41,8 @@
                     <ul class="navbar-nav">
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
-                    <div class="dropdown">
-                        <button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-badge">Hello</i></button>
-                        <ul class="dropdown-menu" aria-labelledby="profile-btn">
-                            <li>
-                                <a class="dropdown-item" asp-controller="Orders" asp-action="Index"><i class="badge-info bi-list">Orders</i></a>
-                            </li>
-                        </ul>
-                    </div>
+                    <partial name="_Identity.cshtml" />
+
                 </div>
             </div>
         </nav>

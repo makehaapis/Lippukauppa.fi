@@ -1,11 +1,14 @@
 ﻿using Lippukauppa.fi.Data;
 using Lippukauppa.fi.Data.Services;
+using Lippukauppa.fi.Data.Static;
 using Lippukauppa.fi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lippukauppa.fi.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class VenuesController : Controller
     {
         private readonly IVenuesService _service;
@@ -14,6 +17,8 @@ namespace Lippukauppa.fi.Controllers
         {
             _service = service;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allVenues = await _service.GetAllAsync();
@@ -35,11 +40,11 @@ namespace Lippukauppa.fi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            var venueDetails = await _service.GetByIdAsync(id);
-            if (venueDetails == null) return View("NotFound");
-            return View(venueDetails);
+            var venueDetail = await _service.GetVenueByIdAsync(id);
+            return View(venueDetail);
         }
 
         //Get: Venues/Edit/id
